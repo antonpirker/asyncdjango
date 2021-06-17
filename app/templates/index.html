@@ -1,0 +1,20 @@
+<html>
+<head>
+    <title>Async Django Project</title>
+</head>
+<body>
+    <h1>Welcome to the async Django project.</h1>
+
+    <p>
+        <ul id="navigation">
+            <li><a href="/">Home</a>
+            <li><a href="/sync">Classic Sync View</a></li>
+            <li><a href="/async">Async View</a></li>
+        </ul>
+    </p>
+
+    {% block main %}
+        This is the home page.
+    {% endblock main %}
+</body>
+</html>
