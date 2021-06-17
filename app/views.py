@@ -4,16 +4,23 @@ from django.template import loader
 
 from django.shortcuts import render
 
-# Create your views here.
+from app.utils import pokemon
+
 
 def index(request, template_name="index.html"):
     context = {}
     return render(request, template_name, context)
     
+
 def synchronous(request, template_name="_sync.html"):
-    context = {}
+    result, duration = pokemon.get_pokemon_sync()
+    context = {
+        'pokemons': result,
+        'duration': duration,
+    }
     return render(request, template_name, context)
 
-def asynchronous(request, template_name="_async.html"):
+
+async def asynchronous(request, template_name="_async.html"):
     context = {}
     return render(request, template_name, context)
