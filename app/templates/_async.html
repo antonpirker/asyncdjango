@@ -1,5 +1,17 @@
 {% extends "index.html" %}
 
 {% block main %}
-This is a new asynchronous view.
+<p>
+This is a asynchronous view.
+</p>
+
+<p>
+Made {{ pokemons|length }} HTTP requests to fetch data. (It took {{ duration|floatformat:3 }} seconds.)
+</p>
+
+<ul>
+    {% for pokemon in pokemons %}
+    <li>{{ pokemon }}</li>
+    {% endfor %}
+</ul>
 {% endblock main %}

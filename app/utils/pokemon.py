@@ -1,21 +1,35 @@
 import requests
-import time
+import aiohttp
+
 
 MAX_POKEMON = 151
-NUM_OF_POKEMON_TO_GET = 10
+NUM_OF_POKEMON_TO_GET = None or MAX_POKEMON
+
+POKE_API_URL = 'https://pokeapi.co/api/v2/pokemon/'
+
 
 def get_pokemon_sync():
-    start_time = time.time()
-
     pokemons = []
 
-    for number in range(1, NUM_OF_POKEMON_TO_GET + 1):
-        url = f'https://pokeapi.co/api/v2/pokemon/{number}'
-        resp = requests.get(url)
+    for number in range(1, NUM_OF_POKEMON_TO_GET+1):
+        pokemon_url = f'{POKE_API_URL}{number}'
+        resp = requests.get(pokemon_url)
         pokemon = resp.json()
         print(pokemon['name'])
         pokemons.append(pokemon['name'])
 
-    end_time = time.time() - start_time
+    return pokemons
 
-    return pokemons, end_time
+
+async def get_pokemon_async():
+    pokemons = []
+
+    async with aiohttp.ClientSession() as session:
+        for number in range(1, NUM_OF_POKEMON_TO_GET+1):
+            pokemon_url = f'{POKE_API_URL}{number}'
+            async with session.get(pokemon_url) as resp:
+                pokemon = await resp.json()
+                print(pokemon['name'])
+                pokemons.append(pokemon['name'])
+
+    return pokemons

@@ -6,6 +6,8 @@ from django.shortcuts import render
 
 from app.utils import pokemon
 
+import time
+
 
 def index(request, template_name="index.html"):
     context = {}
@@ -13,14 +15,27 @@ def index(request, template_name="index.html"):
     
 
 def synchronous(request, template_name="_sync.html"):
-    result, duration = pokemon.get_pokemon_sync()
+    start_time = time.time()
+    result = pokemon.get_pokemon_sync()
+    duration = time.time() - start_time
+
     context = {
         'pokemons': result,
         'duration': duration,
     }
+
     return render(request, template_name, context)
 
 
 async def asynchronous(request, template_name="_async.html"):
-    context = {}
+    start_time = time.time()
+    result = await pokemon.get_pokemon_async()
+    duration = time.time() - start_time
+    print(result)
+
+    context = {
+        'pokemons': result,
+        'duration': duration,
+    }
+
     return render(request, template_name, context)
