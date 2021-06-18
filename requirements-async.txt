@@ -1,6 +1,7 @@
 django==3.2
 requests
 aiohttp
+asyncio
 
 gunicorn
 uvicorn
