@@ -11,9 +11,6 @@ logger = logging.getLogger(__name__)
 MAX_POKEMON = 50
 NUM_OF_POKEMON_TO_GET = None or MAX_POKEMON
 
-#POKE_API_URL = 'https://pokeapi.co/api/v2/pokemon/'
-POKE_API_URL = 'https://en.wikipedia.org/w/api.php?format=json&action=query&titles=pokemon'
-
 
 def get_pokemon_sync():
     pokemons = []
