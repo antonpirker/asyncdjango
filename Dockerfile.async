@@ -1,0 +1,30 @@
+#
+# Dockerfile for the ASYNCRONOUS version of the project.
+#
+# Build:
+# docker build --tag asyncdjango-async:v0 --file Dockerfile.async .
+#
+# Run:
+# docker run --env-file env -p 9000:8000 asyncdjango-async:v0
+#
+
+
+FROM python:3.9-buster
+
+RUN apt update && apt install htop
+
+ADD requirements-async.txt /app/requirements-async.txt
+
+RUN python -m venv /env
+RUN /env/bin/pip install --upgrade pip
+RUN /env/bin/pip install --no-cache-dir -r /app/requirements-async.txt
+
+ADD . /app
+WORKDIR /app
+
+ENV VIRTUAL_ENV /env
+ENV PATH /env/bin:$PATH
+
+EXPOSE 8000
+
+CMD ["gunicorn", "--bind", ":8000", "--workers", "4", "--worker-class", "uvicorn.workers.UvicornWorker", "asyncdjango.asgi:application"]

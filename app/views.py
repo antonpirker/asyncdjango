@@ -8,6 +8,9 @@ from app.utils import pokemon
 
 import time
 
+import logging
+logger = logging.getLogger(__name__)
+
 
 def index(request, template_name="index.html"):
     context = {}
@@ -31,8 +34,7 @@ async def asynchronous(request, template_name="_async.html"):
     start_time = time.time()
     result = await pokemon.get_pokemon_async()
     duration = time.time() - start_time
-    print(result)
-
+    
     context = {
         'pokemons': result,
         'duration': duration,

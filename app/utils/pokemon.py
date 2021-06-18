@@ -1,6 +1,9 @@
 import requests
 import aiohttp
 
+import logging
+logger = logging.getLogger(__name__)
+
 
 MAX_POKEMON = 151
 NUM_OF_POKEMON_TO_GET = None or MAX_POKEMON
@@ -15,7 +18,7 @@ def get_pokemon_sync():
         pokemon_url = f'{POKE_API_URL}{number}'
         resp = requests.get(pokemon_url)
         pokemon = resp.json()
-        print(pokemon['name'])
+        logger.debug(pokemon['name'])
         pokemons.append(pokemon['name'])
 
     return pokemons
@@ -29,7 +32,7 @@ async def get_pokemon_async():
             pokemon_url = f'{POKE_API_URL}{number}'
             async with session.get(pokemon_url) as resp:
                 pokemon = await resp.json()
-                print(pokemon['name'])
+                logger.debug(pokemon['name'])
                 pokemons.append(pokemon['name'])
 
     return pokemons
