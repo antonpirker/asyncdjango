@@ -13,11 +13,11 @@ FROM python:3.9-buster
 
 RUN apt update && apt install htop
 
-ADD requirements-async.txt /app/requirements-async.txt
+ADD requirements.txt /app/requirements.txt
 
 RUN python -m venv /env
 RUN /env/bin/pip install --upgrade pip
-RUN /env/bin/pip install --no-cache-dir -r /app/requirements-async.txt
+RUN /env/bin/pip install --no-cache-dir -r /app/requirements.txt
 
 ADD . /app
 WORKDIR /app
