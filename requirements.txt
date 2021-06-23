@@ -1,0 +1,12 @@
+django==3.2
+
+# async
+uvicorn
+asyncpg
+aiohttp  
+asyncio  
+
+# sync
+gunicorn
+psycopg2-binary
+requests

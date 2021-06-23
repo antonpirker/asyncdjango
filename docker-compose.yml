@@ -1,0 +1,29 @@
+version: "3.8"
+services:
+
+  django:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      args:
+        ASYNC_DB_HOST: "postgres"
+    expose: 
+        - "8000"
+    ports:
+      - "8000:8000"
+    links:
+      - postgres
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=asyncdjango
+      - POSTGRES_USER=asyncdjango
+      - POSTGRES_PASSWORD=asyncdjango
+      
+volumes:
+  postgres_data: {}
