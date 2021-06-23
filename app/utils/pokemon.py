@@ -1,34 +1,31 @@
 import requests
+import psycopg2
 import aiohttp
 import asyncio
+
+from django.conf import settings
 
 import time
 
 import logging
 logger = logging.getLogger(__name__)
 
-
-MAX_POKEMON = 50
-NUM_OF_POKEMON_TO_GET = None or MAX_POKEMON
-
-POKEMON_URL = 'https://en.wikipedia.org/wiki/List_of_Pok%C3%A9mon'
-#POKEMON_URL = 'https://pokeapi.co/api/v2/pokemon/151'
-
 def get_pokemon_sync():
-    pokemons = []
-    for number in range(1, NUM_OF_POKEMON_TO_GET+1):
-        time.sleep(0.1)
-        logger.debug(number)
-        pokemons.append('x')
+    # Getting the Pokemon from DB without using the ORM
+    # (for better comparision, because there is no async ORM yet)
+    db_settings = settings.DATABASES['default']
+    connection_string = f'postgresql://{db_settings["USER"]}:{db_settings["PASSWORD"]}@{db_settings["HOST"]}:{db_settings["PORT"]}/{db_settings["NAME"]}'
+
+    conn = psycopg2.connect(connection_string)
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM app_pokemon;")
+    pokemons = cur.fetchall()
 
     return pokemons 
 
-async def async_sleep(number):
-    await asyncio.sleep(0.1)
-    logger.debug(number)    
-    return 'x'
 
 async def get_pokemon_async():
+
     async with aiohttp.ClientSession() as session:
         async with session.get(POKEMON_URL) as resp:
             pokemon = await resp.read()
