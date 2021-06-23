@@ -83,7 +83,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': os.getenv('ASYNC_DB_NAME', 'asyncdjango'),
-        'USER': os.getenv('ASYNC_DB_USER', 'asyncdjango'),
+        'USER': os.getenv(' ', 'asyncdjango'),
         'PASSWORD': os.getenv('ASYNC_DB_PASSWORD', 'asyncdjango'),
         'HOST': os.getenv('ASYNC_DB_HOST', 'localhost'),
         'PORT': os.getenv('ASYNC_DB_PORT', 5432),

@@ -18,7 +18,7 @@ CONNECTION_STRING = f'postgresql://{DB["USER"]}:{DB["PASSWORD"]}@{DB["HOST"]}:{D
 
 
 def get_pokemon_sync():
-    # Getting the Pokemon from DB without using the ORM
+    # Getting the Pokemon from DB without using the Django ORM
     # (for better comparision, because there is no async ORM yet)
     conn = psycopg2.connect(CONNECTION_STRING)
     cur = conn.cursor()
