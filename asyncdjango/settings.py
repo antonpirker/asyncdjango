@@ -18,6 +18,7 @@ import logging.config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+DATA_DIR = os.path.join(Path(__file__).resolve().parent.parent, 'data')
 
 
 # Quick-start development settings - unsuitable for production
@@ -80,8 +81,12 @@ WSGI_APPLICATION = 'asyncdjango.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.getenv('ASYNC_DB_NAME', 'asyncdjango'),
+        'USER': os.getenv('ASYNC_DB_USER', 'asyncdjango'),
+        'PASSWORD': os.getenv('ASYNC_DB_PASSWORD', 'asyncdjango'),
+        'HOST': os.getenv('ASYNC_DB_HOST', 'localhost'),
+        'PORT': os.getenv('ASYNC_DB_PORT', 5432),
     }
 }
 

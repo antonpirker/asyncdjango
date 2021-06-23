@@ -25,6 +25,8 @@ WORKDIR /app
 ENV VIRTUAL_ENV /env
 ENV PATH /env/bin:$PATH
 
+RUN python ./manage.py migrate --no-input
+
 EXPOSE 8000
 
 CMD ["gunicorn", "--bind", ":8000", "--workers", "4", "asyncdjango.wsgi:application"]

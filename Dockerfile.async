@@ -22,6 +22,9 @@ RUN /env/bin/pip install --no-cache-dir -r /app/requirements-async.txt
 ADD . /app
 WORKDIR /app
 
+COPY data/pokemon.csv .
+RUN python ./manage.py migrate --no-input
+
 ENV VIRTUAL_ENV /env
 ENV PATH /env/bin:$PATH
 ENV PYTHONASYNCIODEBUG 1
