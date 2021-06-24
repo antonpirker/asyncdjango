@@ -11,7 +11,7 @@
 
 FROM python:3.9-buster
 
-RUN apt update && apt install htop
+RUN apt update && apt install postgresql postgresql-contrib
 
 ADD requirements.txt /app/requirements.txt
 
