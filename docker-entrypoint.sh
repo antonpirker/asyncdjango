@@ -16,6 +16,9 @@ cat ~/.pgpass
 echo "Connection as admin user:"
 psql "postgres://wdprcustomeradm@customers-postgres-12.c0ivpkyb3o26.eu-central-1.rds.amazonaws.com:5432/postgres" -c "select * from information_schema.schemata;"
 
+echo "Reset password of user:"
+psql "postgres://wdprcustomeradm@customers-postgres-12.c0ivpkyb3o26.eu-central-1.rds.amazonaws.com:5432/postgres" -c "alter role antonpirker with password 'e44ccd99e65b71bbaf13913e85e9063463fab1d3fd122d58692dc02dcede';"
+
 echo "Connection as customer user:"
 psql "postgres://antonpirker@postgres12.wdpr.run:5432/antonpirker" -c "select version();"
 
