@@ -11,7 +11,7 @@
 
 FROM python:3.9-buster
 
-RUN apt update && apt install postgresql postgresql-contrib
+RUN apt update && apt install -y postgresql postgresql-contrib
 
 ADD requirements.txt /app/requirements.txt
 
