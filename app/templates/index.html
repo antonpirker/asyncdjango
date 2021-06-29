@@ -3,7 +3,7 @@
     <title>Async Django Project</title>
 </head>
 <body>
-    <h1>Welcome to the async Django project.</h1>
+    <h1>Welcome to the async Django test project (with sync workers).</h1>
 
     <p>
         <ul id="navigation">
@@ -14,7 +14,15 @@
     </p>
 
     {% block main %}
-        This is the home page.
+    <p>
+        This is the version running the default sync workers of Gunicorn. 
+    </p>
+    <p>
+        The server is started with something like this:
+    </p>
+    <pre>
+        gunicorn asyncdjango.wsgi:application
+    </pre>
     {% endblock main %}
 </body>
 </html>
