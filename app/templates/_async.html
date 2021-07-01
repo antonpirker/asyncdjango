@@ -2,13 +2,58 @@
 
 {% block main %}
 <p>
-This is a asynchronous view.
+This is a <b>asynchronous</b> view.
 </p>
 
 <p>
-Fetched {{ pokemons|length }} Pokemon from database. (It took {{ duration|floatformat:6 }} seconds.)
+Fetched {{ pokemons|length }} Pokemon from database (+ the details of one). <br/>
+It took <b>{{ duration|floatformat:6 }}</b> seconds.
 </p>
 
+<h2>Detail of one:</h2>
+<div>
+    <dl>
+        <dt>Name</dt>
+        <dd>{{ pokemon.name }}</dd>
+
+        <dt>Number</dt>
+        <dd>{{ pokemon.number }}</dd>
+
+        <dt>Type of Pokemon</dt>
+        <dd>{{ pokemon.type1 }}</dd>
+
+        <dt>Other Type of Pokemon</dt>
+        <dd>{{ pokemon.type2|default:'-' }}</dd>
+
+        <dt>Hit Points</dt>
+        <dd>{{ pokemon.hp }}</dd>
+
+        <dt>Attack</dt>
+        <dd>{{ pokemon.attack }}</dd>
+
+        <dt>Defense</dt>
+        <dd>{{ pokemon.defense }}</dd>
+
+        <dt>Special Attack Strength</dt>
+        <dd>{{ pokemon.sp_atk }}</dd>
+
+        <dt>Special Defensive Strength</dt>
+        <dd>{{ pokemon.sp_def }}</dd>
+
+        <dt>Speed</dt>
+        <dd>{{ pokemon.speed }}</dd>
+
+        <dt>Generation</dt>
+        <dd>{{ pokemon.generation }}</dd>
+
+        <dt>Legendary Pokemon?</dt>
+        <dd>{{ pokemon.legendary }}</dd>
+    </dl>
+</div>
+
+<hr>
+
+<h2>All:</h2>
 <ul>
     {% for pokemon in pokemons %}
     <li>{{ pokemon }}</li>
