@@ -13,16 +13,14 @@
         </ul>
     </p>
 
-    {% block main %}
     <p>
-        This is the version running the default sync workers of Gunicorn. 
-    </p>
-    <p>
+        This is the version running the default <b>sync workers of Gunicorn</b>. <br/>
         The server is started with something like this:
+        <pre>
+            gunicorn asyncdjango.wsgi:application
+        </pre>
     </p>
-    <pre>
-        gunicorn asyncdjango.wsgi:application
-    </pre>
+    {% block main %}
     {% endblock main %}
 </body>
 </html>
