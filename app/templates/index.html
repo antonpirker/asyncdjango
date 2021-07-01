@@ -13,16 +13,14 @@
         </ul>
     </p>
 
-    {% block main %}
     <p>
-        This is the version running async Uvicorn workers in Gunicorn. (like described in the <a href="https://www.uvicorn.org/deployment/" target="_blank">Uvicorn Deployment Documentation</a>)
-    </p>
-    <p>
+        This is the version running <b>async Uvicorn workers in Gunicorn</b>. (like described in the <a href="https://www.uvicorn.org/deployment/" target="_blank">Uvicorn Deployment Documentation</a>) <br/>
         The server is started with something like this:
+        <pre>
+            gunicorn --worker-class uvicorn.workers.UvicornWorker asyncdjango.asgi:application
+        </pre>
     </p>
-    <pre>
-        gunicorn --worker-class uvicorn.workers.UvicornWorker asyncdjango.asgi:application
-    </pre>
+    {% block main %}
     {% endblock main %}
 </body>
 </html>
