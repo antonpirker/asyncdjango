@@ -31,7 +31,7 @@ SECRET_KEY = 'django-insecure-0@&a2ug*vc%iy854q3yxk%d-2q50frk)che%lrm$0bnu)i38z$
 DEBUG = os.getenv('DEBUG', True)
 
 from socket import gethostname, gethostbyname
-ALLOWED_HOSTS = [ gethostname(), gethostbyname(gethostname()), ] 
+ALLOWED_HOSTS = [ 'localhost', gethostname(), gethostbyname(gethostname()), ]
 
 # Application definition
 
