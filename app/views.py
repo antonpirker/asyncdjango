@@ -25,7 +25,6 @@ def synchronous(request, template_name="_sync.html"):
     result = pokemon.get_pokemon_sync()
     duration = time.time() - start_time
 
-    print(f'ssync: {duration}')
     context = {
         'pokemon': pikachu,
         'pokemons': result,
@@ -36,12 +35,19 @@ def synchronous(request, template_name="_sync.html"):
 
 
 async def asynchronous(request, template_name="_async.html"):
+    print('------------------')
     start_time = time.time()
-    pikachu = await pokemon.get_one_pokemon_async()
-    result = await pokemon.get_pokemon_async()
+    print('view 1')
+    results = await asyncio.gather(
+        pokemon.get_one_pokemon_async(),
+        pokemon.get_pokemon_async(),
+    )
+    print('view 2')
+    pikachu = results[0]
+    result = results[1]
     duration = time.time() - start_time
-    
-    print(f'async: {duration}')
+    print('view 3')
+
     context = {
         'pokemon': pikachu,
         'pokemons': result,

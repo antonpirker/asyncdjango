@@ -80,7 +80,7 @@ async def get_pokemon_async():
 async def get_one_pokemon_async():
     print('one pokemon 1')
     conn = await asyncpg.connect(CONNECTION_STRING)
-    print('one pokemon 2')
+    print('one pokemon ')
     async with conn.transaction():
         print('one pokemon 3')
         cur = await conn.cursor(SQL_STATEMENT_ONE)
