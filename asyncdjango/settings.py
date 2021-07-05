@@ -28,7 +28,8 @@ DATA_DIR = os.path.join(Path(__file__).resolve().parent.parent, 'data')
 SECRET_KEY = 'django-insecure-0@&a2ug*vc%iy854q3yxk%d-2q50frk)che%lrm$0bnu)i38z$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', True)
+DEBUG = os.getenv('DEBUG', 'True').lower() in ('true', 't', '1')
+
 
 from socket import gethostname, gethostbyname
 ALLOWED_HOSTS = [ 'localhost', gethostname(), gethostbyname(gethostname()), ]
