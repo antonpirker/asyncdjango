@@ -62,32 +62,32 @@ def get_one_pokemon_sync():
 
 
 async def get_pokemon_async():
-    print('get_pokemon_async 1')
+    #print('get_pokemon_async 1')
     conn = await asyncpg.connect(CONNECTION_STRING)
-    print('get_pokemon_async 2')
+    #print('get_pokemon_async 2')
     async with conn.transaction():
-        print('get_pokemon_async 3')
+        #print('get_pokemon_async 3')
         cur = await conn.cursor(SQL_STATEMENT)
-        print('get_pokemon_async 4')
+        #print('get_pokemon_async 4')
         pokemons = await cur.fetch(1000)
 
-    print('get_pokemon_async 5')
+    #print('get_pokemon_async 5')
     await conn.close()
 
     return [{'number': pokemon['number'], 'name': pokemon['name']} for pokemon in pokemons]
 
 
 async def get_one_pokemon_async():
-    print('one pokemon 1')
+    #print('one pokemon 1')
     conn = await asyncpg.connect(CONNECTION_STRING)
-    print('one pokemon ')
+    #print('one pokemon ')
     async with conn.transaction():
-        print('one pokemon 3')
+        #print('one pokemon 3')
         cur = await conn.cursor(SQL_STATEMENT_ONE)
-        print('one pokemon 4')
+        #print('one pokemon 4')
         pokemon = await cur.fetchrow()
 
-    print('one pokemon 5')
+    #print('one pokemon 5')
     await conn.close()
 
     return pokemon
