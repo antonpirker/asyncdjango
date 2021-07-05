@@ -29,8 +29,6 @@ SECRET_KEY = 'django-insecure-0@&a2ug*vc%iy854q3yxk%d-2q50frk)che%lrm$0bnu)i38z$
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'True').lower() in ('true', 't', '1')
-print('##################################')
-print(DEBUG)
 
 
 from socket import gethostname, gethostbyname
