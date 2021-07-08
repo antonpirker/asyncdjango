@@ -8,4 +8,4 @@ echo "Running Migrations"
 python ./manage.py migrate --no-input
 
 # execute the given command
-newrelic-admin run-program "\$@"
+exec chamber exec $APP_ENVIRONMENT -- newrelic-admin run-program "\$@"

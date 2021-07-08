@@ -38,12 +38,15 @@ COPY docker-entrypoint.sh docker-entrypoint.sh
 RUN /env/bin/pip install --upgrade newrelic
 RUN newrelic-admin generate-config XXX_LICENCE_KEY_XXX newrelic.ini
 
+# install chamber so it can brake :-)
+COPY --from=segment/chamber:2.8.2 /chamber /usr/local/bin/chamber
+
+# for chamber
+ARG environment=backend
+ENV APP_ENVIRONMENT=${environment}
+
 EXPOSE 8000
 
 ENTRYPOINT ["/app/docker-entrypoint.sh"]
 
-# sync server:
 CMD ["gunicorn", "--bind", ":8000", "--workers", "4", "asyncdjango.wsgi:application"]
-
-# async server:
-#CMD ["gunicorn", "--bind", ":8000", "--workers", "4", "--worker-class", "uvicorn.workers.UvicornWorker", "asyncdjango.asgi:application"]
