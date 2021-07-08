@@ -34,6 +34,10 @@ ENV ASYNC_DB_HOST=${ASYNC_DB_HOST}
 COPY data/pokemon.csv .
 COPY docker-entrypoint.sh docker-entrypoint.sh
 
+# install new relic so it can brake :-)
+RUN /env/bin/pip install --upgrade newrelic
+RUN newrelic-admin generate-config XXX_LICENCE_KEY_XXX newrelic.ini
+
 EXPOSE 8000
 
 ENTRYPOINT ["/app/docker-entrypoint.sh"]
