@@ -6,6 +6,7 @@ from django.shortcuts import render
 
 from app.utils import pokemon
 
+import asyncio
 import time
 
 import logging
@@ -34,8 +35,12 @@ def synchronous(request, template_name="_sync.html"):
 
 async def asynchronous(request, template_name="_async.html"):
     start_time = time.time()
-    result = await pokemon.get_pokemon_async()
-    pikachu = await pokemon.get_one_pokemon_async()
+    results = await asyncio.gather(
+        pokemon.get_one_pokemon_async(),
+        pokemon.get_pokemon_async(),
+    )
+    pikachu = results[0]
+    result = results[1]
     duration = time.time() - start_time
 
     context = {
